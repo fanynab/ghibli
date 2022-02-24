@@ -12,6 +12,7 @@
   position: relative;
   border: 3px solid #a1cae2;
   border-radius: 50px;
+  background-color: #f9f9f9;
 }
 
 #character-name {

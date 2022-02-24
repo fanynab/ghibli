@@ -79,7 +79,7 @@ const getChar = async (keyword) => {
                 <div class="movie-element">
                   <table class="movie-box">
                     <tr>
-                      <td valign="top"><img src="${image}" width="200"></td>
+                      <td valign="top"><img src="${image}" width="210"></td>
                     </tr>
                     <tr>
                       <td>
