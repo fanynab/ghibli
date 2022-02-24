@@ -39,8 +39,12 @@
   padding: 80px 50px;
 }
 
+.error-message {
+  text-align: center;
+}
+
 .result-element {
-  border: 3px solid #aad2e9;
+  border: 1px solid #aad2e9;
   background-color: #f9f9f9;
   border-radius: 13px;
   margin-bottom: 50px;
@@ -59,6 +63,20 @@
 .result-box {
   width: 60%;
   margin: 20px;
+}
+
+.details-bar {
+  border: 1px solid #a1cae2;
+  background-color: #a1cae2;
+  text-align: center;
+  margin: 0px 12px;
+}
+
+.movie-box {
+  margin: 20px 50px 20px 20px;
+  padding: 10px;
+  text-align: justify;
+  table-layout: fixed;
 }
 
 .footer-text {
