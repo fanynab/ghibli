@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- My CSS -->
+    <link rel="stylesheet" href="stylesheet.css" />
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous" />
+    
+    <title>Studio Ghibli</title>
+  </head>
+  <body id="find-char">
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light shadow-sm fixed-top" style="background-color: #A1CAE2;">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">
+          <img src="https://upload.wikimedia.org/wikipedia/en/thumb/c/ca/Studio_Ghibli_logo.svg/330px-Studio_Ghibli_logo.svg.png" alt="Logo Image" width="100" height="50" />
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="#find-char">Find Character</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#results">Result</a>
+            </li>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <!-- End of Navbar -->
+
+    <!-- Search Container -->
+    <section class="jumbotron">
+      <div class="container">
+        <h1 class="top-container text-center">Studio Ghibli Characters: Everything You Need to Know!</h1>
+      </div>
+      <div class="search-box col-md-6 col-lg-6 col-11 mx-auto my-auto">
+        <div class="element-container input-group">
+          <input id="character-name" class="form-control me-2 shadow-none" type="search" placeholder="Search character" aria-label="Search">
+          <button id="btn-search" class="btn btn-outline-success shadow-none" onclick="findChar()"><span class="fa fa-search"></span></button>
+        </div>
+      </div>
+    </section>
+    <!-- End of Search Container-->
+
+    <!-- Result -->
+    <section id="results" style="background-color: #eff7fc;">
+      <div id="characters"></div>
+    </section>
+    <!-- End of Result -->
+
+    <!-- Footer -->
+    <footer class="text-center p-1" style="background-color: #A1CAE2;">
+      <p class="footer-text">Created by Fany Nabilah</p>
+    </footer>
+    <!-- End of Footer -->
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    
+    <!-- My Javascript -->
+    <script src="script.js"></script>
+  </body>
+</html>
+
+<!-- <html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Studio Ghibli</title>
+    <link rel="stylesheet" href="stylesheet.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+  </head>
+  <body>
+    <header>
+      <div class="header-container">
+        <div>
+          <p class="header-logo" align="right">Ghibli Character</p>
+          <img src="https://upload.wikimedia.org/wikipedia/en/thumb/c/ca/Studio_Ghibli_logo.svg/330px-Studio_Ghibli_logo.svg.png" alt="logo image" width="100" height="50" />
+        </div>
+      </div>
+    </header>
+    <div id="content">
+      <h1 class="top-content">Studio Ghibli Characters: Everything You Need to Know!</h1>
+      <div class="box-container">
+        <table class="element-container">
+          <tr>
+            <td>
+              <input type="text" id="character-name" placeholder="Search" />
+            </td>
+            <td>
+              <button id="btn-search" onclick="findChar()"><span class="fa fa-search"></span></button>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+    <div id="characters"></div>
+    <script src="script.js"></script>
+  </body>
+</html> -->
