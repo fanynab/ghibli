@@ -18,7 +18,6 @@ const getChar = async (keyword) => {
     }
     console.log(ghibliChar);
 
-    //Menampilkan character
     for (let i = 0; i < ghibliChar.length; i++) {
       const ghibli = ghibliChar[i];
 
@@ -26,28 +25,39 @@ const getChar = async (keyword) => {
         .then((response) => response.json())
         .then((response) => {
           const name = ghibli.name;
-          const gender = ghibli.gender;
           const eyeColor = ghibli.eye_color;
           const hairColor = ghibli.hair_color;
+
+          let gender;
+          if (ghibli.gender == "" || ghibli.gender == undefined) {
+            gender = "N/A";
+          } else {
+            gender = ghibli.gender;
+          }
+
+          let age;
+          if (ghibli.age == "") {
+            age = "N/A";
+          } else {
+            age = ghibli.age;
+          }
+
           const title = response.title;
           const oriTitle = response.original_title;
           const image = response.image;
           const desc = response.description;
           const year = response.release_date;
-          let age;
-          if (ghibli.age == "") {
-            age = "NA";
-          } else {
-            age = ghibli.age;
-          }
 
-          const movieRes = document.getElementById("characters");
-          const movieResult = document.createElement("div");
-          movieResult.innerHTML = `
-              <div class="result-element">
-                <div class="character-element">
-                  <h5 class="character-name">Studio Ghibli Character: <strong><em>${name}</em></strong></h5>
-                  <table class="result-box" cellpadding="4">
+          //Menampilkan character
+          const charResult = document.getElementById("characters");
+          const ghibliResult = document.createElement("div");
+          ghibliResult.innerHTML = `
+              <div class="card shadow-sm" style="width: 20rem;">
+                <div class="card-header" style="background-color: #a1cae2;">
+                    <h5 class="character-name">Studio Ghibli Character:<br><strong><em>${name}</em></strong></h5>
+                </div>
+                <div class="card-body">
+                  <table cellpadding="4">
                     <tr>
                       <td>Age</td>
                       <td>:</td>
@@ -69,38 +79,28 @@ const getChar = async (keyword) => {
                       <td>${hairColor}</td>
                     </tr>
                     <tr>
-                      <td valign="top">Appears on</td>
-                      <td valign="top">:</td>
+                        <td valign="top">Appears on</td>
+                        <td valign="top">:</td>
                       <td valign="top">${title}<br>${oriTitle}</td>
                     </tr>
                   </table>
-                </div>
-                <p class="details-bar">Movie Details</p>
-                <div class="movie-element">
-                  <table class="movie-box">
-                    <tr>
-                      <td valign="top"><img src="${image}" width="210"></td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <strong><br>${title}<br>${oriTitle}</strong>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        ${year}<br><br>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        ${desc}
-                      </td>
-                    </tr>
-                  </table>
+                  <button href="#" class="btn-details" data-bs-toggle="modal" data-bs-target="#exampleModal">Movie Details</button>
                 </div>
               </div>
               `;
-          movieRes.append(movieResult);
+          charResult.append(ghibliResult);
+
+          const movieResult = document.getElementById("modal-body");
+          const ghibliMovie = document.createElement("div");
+          ghibliMovie.innerHTML = `
+              <div class="movie-element text-center">
+                <img src="${image}" width="210">
+                <p><strong><br>${title}<br>${oriTitle}</strong></p>
+                <p>${year}</p>
+                <p>${desc}</p>
+              </div>
+              `;
+          movieResult.append(ghibliMovie);
         });
     }
     return ghibliChar;
@@ -112,8 +112,5 @@ const getChar = async (keyword) => {
 
 const findChar = async () => {
   const keyword = document.getElementById("character-name").value;
-  if (keyword == "") {
-    console.log("Character Not Found");
-  }
   const characters = await getChar(keyword);
 };
