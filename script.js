@@ -51,7 +51,7 @@ const getChar = async (keyword) => {
           const charResult = document.getElementById("characters");
           const ghibliResult = document.createElement("div");
           ghibliResult.innerHTML = `
-              <div class="card shadow" style="width: 20rem;">
+              <div class="card shadow-sm" style="width: 20rem;">
                 <div class="card-header" style="background-color: #D1D1D1;">
                     <h5 class="character-name">Studio Ghibli Character:<br><strong><em>${name}</em></strong></h5>
                 </div>
