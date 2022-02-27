@@ -17,7 +17,7 @@
   </head>
   <body id="find-char">
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-light shadow-sm fixed-top" style="background-color: #A1CAE2;">
+    <nav class="navbar navbar-expand-lg navbar-light shadow-sm fixed-top" style="background-color: #f6f6f6;">
       <div class="container-fluid">
         <a class="navbar-brand" href="#">
           <img src="https://upload.wikimedia.org/wikipedia/en/thumb/c/ca/Studio_Ghibli_logo.svg/330px-Studio_Ghibli_logo.svg.png" alt="Logo Image" width="100" height="50" />
@@ -59,12 +59,12 @@
       <div id="characters"></div>
 
       <!-- Modal -->
-      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
               <h5 class="modal-title" id="exampleModalLabel">Movie Details</h5>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              <button type="button" id="modal-close" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div id="modal-body"></div>
           </div>
@@ -76,7 +76,7 @@
     <!-- End of Result -->
 
     <!-- Footer -->
-    <footer class="text-center p-1" style="background-color: #A1CAE2;">
+    <footer class="text-center p-1" style="background-color: #f6f6f6;">
       <p class="footer-text"><strong>S T U D I O  G H I B L I</strong></p>
     </footer>
     <!-- End of Footer -->

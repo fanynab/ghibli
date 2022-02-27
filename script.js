@@ -4,32 +4,33 @@ const getChar = async (keyword) => {
       method: "GET",
     });
     const ghibliChar = await response.json();
+    console.log(ghibliChar);
 
     //Message saat keyword tidak ditemukan
-    if (ghibliChar == "") {
-      const message = document.getElementById("characters");
+    if (ghibliChar == "" || ghibliChar.length >= 5) {
+      const message = document.getElementById("results");
       const mesResult = document.createElement("div");
       mesResult.innerHTML = `
-            <div class="error-message">
-              <p>Couldn't find any Studio Ghibli characters. Please try another name.</p>
-            </div>
+          <div class="alert alert-secondary" role="alert" text-center>
+            Couldn't find any Studio Ghibli characters. Please try another name.
+          </div>
           `;
       message.append(mesResult);
+      return ghibliChar;
     }
-    console.log(ghibliChar);
 
     for (let i = 0; i < ghibliChar.length; i++) {
       const ghibli = ghibliChar[i];
 
-      fetch(ghibliChar[i].films)
+      fetch(ghibli.films)
         .then((response) => response.json())
-        .then((response) => {
+        .then((movies) => {
           const name = ghibli.name;
           const eyeColor = ghibli.eye_color;
           const hairColor = ghibli.hair_color;
 
           let gender;
-          if (ghibli.gender == "" || ghibli.gender == undefined) {
+          if (ghibli.gender == "NA" || ghibli.gender == undefined) {
             gender = "N/A";
           } else {
             gender = ghibli.gender;
@@ -42,18 +43,16 @@ const getChar = async (keyword) => {
             age = ghibli.age;
           }
 
-          const title = response.title;
-          const oriTitle = response.original_title;
-          const image = response.image;
-          const desc = response.description;
-          const year = response.release_date;
+          const id = movies.id;
+          const title = movies.title;
+          const oriTitle = movies.original_title;
+          const movieBanner = movies.movie_banner;
 
-          //Menampilkan character
           const charResult = document.getElementById("characters");
           const ghibliResult = document.createElement("div");
           ghibliResult.innerHTML = `
-              <div class="card shadow-sm" style="width: 20rem;">
-                <div class="card-header" style="background-color: #a1cae2;">
+              <div class="card shadow" style="width: 20rem;">
+                <div class="card-header" style="background-color: #D1D1D1;">
                     <h5 class="character-name">Studio Ghibli Character:<br><strong><em>${name}</em></strong></h5>
                 </div>
                 <div class="card-body">
@@ -78,29 +77,15 @@ const getChar = async (keyword) => {
                       <td>:</td>
                       <td>${hairColor}</td>
                     </tr>
-                    <tr>
-                        <td valign="top">Appears on</td>
-                        <td valign="top">:</td>
-                      <td valign="top">${title}<br>${oriTitle}</td>
-                    </tr>
                   </table>
-                  <button href="#" class="btn-details" data-bs-toggle="modal" data-bs-target="#exampleModal">Movie Details</button>
+                  <p class="text-center"><br>This character appears in the movie <em>${title} (${oriTitle})</em>.</p>
+                  <input id="input-id" type="hidden" value="${id}">
+                  <button href="#" class="movie-details" data-bs-toggle="modal" data-bs-target="#staticBackdrop" onclick="findMovie()">Movie Details</button>
+                  <img src="${movieBanner}" width="100%">
                 </div>
               </div>
               `;
           charResult.append(ghibliResult);
-
-          const movieResult = document.getElementById("modal-body");
-          const ghibliMovie = document.createElement("div");
-          ghibliMovie.innerHTML = `
-              <div class="movie-element text-center">
-                <img src="${image}" width="210">
-                <p><strong><br>${title}<br>${oriTitle}</strong></p>
-                <p>${year}</p>
-                <p>${desc}</p>
-              </div>
-              `;
-          movieResult.append(ghibliMovie);
         });
     }
     return ghibliChar;
@@ -113,4 +98,54 @@ const getChar = async (keyword) => {
 const findChar = async () => {
   const keyword = document.getElementById("character-name").value;
   const characters = await getChar(keyword);
+
+  document.getElementById("character-name").value = "";
+  document.getElementById("characters").innerHTML = "";
 };
+
+const getMovie = async function (id) {
+  const response = await fetch(`https://ghibliapi.herokuapp.com/films/${id}`, {
+    method: "GET",
+  });
+
+  const movie = await response.json();
+  console.log(movie);
+  const title = movie.title;
+  const oriTitle = movie.original_title;
+  const romanised = movie.original_title_romanised;
+  const image = movie.image;
+  const desc = movie.description;
+  const year = movie.release_date;
+  const director = movie.director;
+  const rtScore = movie.rt_score;
+  const producer = movie.producer;
+
+  const movieResult = document.getElementById("modal-body");
+  const ghibliMovie = document.createElement("div");
+  ghibliMovie.innerHTML = `
+      <div class="movie-element">
+        <div class="top-movie text-center">
+          <img src="${image}" width="210">
+          <p><strong><br>${title} / ${romanised} <br> ${oriTitle}</strong></p>
+          <p>${year}<br></p>
+        </div>
+          <p><strong>Rotten Tomatoes Score:</strong><br>${rtScore}%</p>
+          <p><strong>Director:</strong><br>${director}<br></p>
+          <p><strong>Producer:</strong><br>${producer}<br></p>
+          <p align="justify"><strong>Description:</strong><br>${desc}</p>
+      </div>
+      `;
+  movieResult.append(ghibliMovie);
+
+  return movie;
+};
+
+const findMovie = async () => {
+  const id = document.getElementById("input-id").value;
+  const movies = await getMovie(id);
+};
+
+const buttonClose = document.getElementById("modal-close");
+buttonClose.addEventListener("click", function () {
+  document.getElementById("modal-body").innerHTML = "";
+});
